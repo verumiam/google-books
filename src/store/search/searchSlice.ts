@@ -73,7 +73,7 @@ const searchSlice = createSlice({
         if (state.currentIndex === 0) {
           state.results = relevantInfo;
         } else {
-          state.results = [...state.results, relevantInfo];
+          state.results = [...state.results, ...relevantInfo];
         }
       })
       .addCase(searchBooks.rejected, (state) => {
