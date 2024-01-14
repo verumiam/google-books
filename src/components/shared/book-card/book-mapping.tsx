@@ -8,7 +8,7 @@ import BookCard from '@/components/shared/book-card';
 import Container from '@/components/shared/container';
 import classes from '@/components/shared/book-card/styles/book-mapping.module.scss';
 import { incRandomPage, selectRandomBooks } from '@/store/random/randomSlice';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import useRandomActions from '@/store/random/randomActions';
 import BookSkeleton from './book-skeleton';
 import { useSearchParams } from 'next/navigation';
@@ -38,15 +38,7 @@ function BookMapping() {
 
   const searchQuery = useSearchParams().get('search');
 
-  const isFirstLoad = useRef(true);
-
   useEffect(() => {
-    if (isFirstLoad.current) {
-      isFirstLoad.current = false;
-
-      return;
-    }
-
     if (!searchQuery) {
       router.push(`?sort=${sort}&filter=${filter}`, { scroll: false });
       getRandomBooks(sort, filter, randomIndex || 0);
@@ -54,7 +46,8 @@ function BookMapping() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort, filter, searchQuery, randomIndex]);
 
-  const loadMoreHandler = () => {
+  const loadMoreHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     !searchQuery ? dispatch(incRandomPage()) : dispatch(incSearchPage());
   };
 
@@ -72,7 +65,7 @@ function BookMapping() {
             ))}
       </div>
       {checkData && (
-        <Button className={classes.list_btn} onClick={loadMoreHandler}>
+        <Button className={classes.list_btn} onClick={(e) => loadMoreHandler(e)}>
           Load more
         </Button>
       )}
