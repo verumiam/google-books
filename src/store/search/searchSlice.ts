@@ -1,58 +1,66 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Book from '@/store/types';
 
-interface RandomBooksState {
+interface SearchState {
+  query: string;
   results: Book[];
   loading: boolean;
   currentIndex: number;
+  total: number;
 }
 
-export const randomBooks = createAsyncThunk(
-  'random/randomBooks',
+export const searchBooks = createAsyncThunk(
+  'search/searchBooks',
   async ({
+    query,
     filter,
     sort,
     currentIndex,
   }: {
+    query: string;
     filter: string;
     sort: string;
     currentIndex: number;
   }) => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-    const apiUrl = `${process.env.NEXT_PUBLIC_GOOGLE_API_URL}?q=${filter}&key=${apiKey}&maxResults=30&orderBy=${sort}&startIndex=${currentIndex}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_GOOGLE_API_URL}?q=${query}+${filter}&key=${apiKey}&maxResults=30&orderBy=${sort}&startIndex=${currentIndex}`;
 
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    return data.items || [];
+    return { items: data.items || [], totalItems: data.totalItems || 0 };
   }
 );
 
-const randomBooksSlice = createSlice({
-  name: 'random',
+const searchSlice = createSlice({
+  name: 'search',
   initialState: {
+    query: '',
     results: [] as Book[],
     loading: false,
     currentIndex: 0,
-  } as RandomBooksState,
+    total: 0,
+  } as SearchState,
   reducers: {
     setQuery: (state, action) => {
-      state.results = action.payload;
+      state.query = action.payload;
     },
-    incRandomPage: (state) => {
+    incSearchPage: (state) => {
       state.currentIndex += 30;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(randomBooks.pending, (state) => {
+      .addCase(searchBooks.pending, (state) => {
         state.loading = true;
       })
-      .addCase(randomBooks.fulfilled, (state, action) => {
+      .addCase(searchBooks.fulfilled, (state, action) => {
         state.loading = false;
 
+        const { items, totalItems } = action.payload;
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const relevantInfo = action.payload.map((book: any) => ({
+        const relevantInfo = items.map((book: any) => ({
           id: book.id,
           title: book.volumeInfo.title || '',
           authors: book.volumeInfo.authors || [],
@@ -60,20 +68,22 @@ const randomBooksSlice = createSlice({
           categories: book.volumeInfo.categories || [],
         }));
 
+        state.total = totalItems;
+
         if (state.currentIndex === 0) {
           state.results = relevantInfo;
         } else {
           state.results = [...state.results, relevantInfo];
         }
       })
-      .addCase(randomBooks.rejected, (state) => {
+      .addCase(searchBooks.rejected, (state) => {
         state.loading = false;
       });
   },
 });
 
-export const { setQuery, incRandomPage } = randomBooksSlice.actions;
+export const { setQuery, incSearchPage } = searchSlice.actions;
 
-export const selectRandomBooks = (state: { random: RandomBooksState }) => state.random;
+export const selectSearch = (state: { search: SearchState }) => state.search;
 
-export default randomBooksSlice.reducer;
+export default searchSlice.reducer;

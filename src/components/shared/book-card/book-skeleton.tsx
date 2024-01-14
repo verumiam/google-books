@@ -1,6 +1,6 @@
-import classes from '@/components/shared/book-card/skeleton-card.module.scss';
+import classes from '@/components/shared/book-card/styles/book-skeleton.module.scss';
 
-function SkeletonCard() {
+function BookSkeleton() {
   return (
     <div className={classes.skeleton}>
       <div className={classes.skeleton_img} />
@@ -10,4 +10,4 @@ function SkeletonCard() {
   );
 }
 
-export default SkeletonCard;
+export default BookSkeleton;

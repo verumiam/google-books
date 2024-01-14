@@ -1,4 +1,4 @@
-import { searchBooks } from '@/store/searchSlice';
+import { searchBooks } from '@/store/search/searchSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store/store';
 

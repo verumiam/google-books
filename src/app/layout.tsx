@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
-import { StoreProvider } from '@/store/StoreProvider';
+import { StoreProvider } from '@/store/providers/StoreProvider';
 import Header from '@/components/shared/header';
 
 export const metadata: Metadata = {

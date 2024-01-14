@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchReducer from '@/store/searchSlice';
+import searchReducer from '@/store/search/searchSlice';
 import filtersReducer from '@/store/filterSlice';
 import sortingReducer from '@/store/sortingSlice';
-import randomReducer from '@/store/randomSlice';
+import randomReducer from '@/store/random/randomSlice';
 
 export const store = configureStore({
   reducer: {

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { randomBooks } from '@/store/randomSlice';
+import { randomBooks } from '@/store/random/randomSlice';
 import { AppDispatch } from '@/store/store';
 
 interface RandomBooksArgs {
