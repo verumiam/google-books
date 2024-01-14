@@ -1,0 +1,41 @@
+.header {
+  padding: 12px 0;
+  width: 100%;
+  min-height: 80px;
+  background: #2aabee;
+  display: flex;
+  align-items: center;
+
+  &_inner {
+    display: flex;
+    align-items: center;
+    gap: 0 30px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &_filters {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    &_inner {
+      flex-wrap: wrap;
+      gap: 30px 0;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .header {
+    &_filters {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+  }
+}

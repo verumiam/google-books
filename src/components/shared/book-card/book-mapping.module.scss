@@ -1,0 +1,45 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(5, calc(100% / 5 - 16px / 5 * (5 - 1)));
+  column-gap: 16px;
+  row-gap: 20px;
+  grid-auto-flow: row dense;
+  margin: 40px 0;
+
+  &_btn {
+    display: block;
+    margin: 0 auto 30px;
+    border-radius: 14px;
+    background-color: #2aabee;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 25px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .list {
+    grid-template-columns: repeat(4, calc(100% / 4 - 16px / 4 * (4 - 1)));
+  }
+}
+
+@media (max-width: 991px) {
+  .list {
+    column-gap: 24px;
+    grid-template-columns: repeat(3, calc(100% / 3 - 24px / 3 * (3 - 1)));
+  }
+}
+
+@media (max-width: 768px) {
+  .list {
+    column-gap: 24px;
+    grid-template-columns: repeat(2, calc(100% / 2 - 24px / 2 * (2 - 1)));
+  }
+}
+
+@media (max-width: 540px) {
+  .list {
+    column-gap: 8px;
+    grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+  }
+}

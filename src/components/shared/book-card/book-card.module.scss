@@ -1,0 +1,42 @@
+.card {
+  background-color: #2aa9ee22;
+  padding: 20px;
+
+  &_categories {
+    margin-top: 20px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-weight: 500;
+    height: 35px;
+  }
+
+  &_img {
+    object-fit: contain;
+  }
+
+  &_title {
+    margin-top: 20px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-weight: 600;
+    height: 35px;
+  }
+
+  &_authors {
+    font-size: 14px;
+    color: #808080;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,36 @@
+$animation-duration: 1.5s;
+
+.skeleton {
+  &_img {
+    background: linear-gradient(to right, #d6d6d6, #e3e3e3, #d6d6d6);
+    background-size: 200% 100%;
+    animation: shimmer $animation-duration infinite linear;
+    min-height: 330px;
+    width: 100%;
+  }
+
+  &_title {
+    margin-top: 20px;
+    height: 20px;
+    background: linear-gradient(to right, #d6d6d6, #e3e3e3, #d6d6d6);
+    background-size: 200% 100%;
+    animation: shimmer $animation-duration infinite linear;
+  }
+
+  &_authors {
+    background: linear-gradient(to right, #d6d6d6, #e3e3e3, #d6d6d6);
+    background-size: 200% 100%;
+    animation: shimmer $animation-duration infinite linear;
+    height: 30px;
+    margin-top: 10px;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
